@@ -1,0 +1,18 @@
+.header{
+    height: 75px;
+    padding-top: 30px;
+    padding-left: 30px;
+}
+.menu{
+    height: 70px;
+    padding-top: 25px;
+    background-color: #ddd;
+    padding-left: 30px;
+}
+.menu a{
+    background-color: #464545;
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+}
