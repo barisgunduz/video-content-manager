@@ -1,5 +1,5 @@
 # video-content-manager
-Online Address : Not availible right now. (Need to solve some heroku problems)
+Online Address : https://video-content-manager.herokuapp.com/
 
 Install
 > npm i
