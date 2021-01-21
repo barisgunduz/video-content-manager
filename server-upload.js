@@ -5,6 +5,7 @@ const fs = require("fs");
 const uuid = require('uuid').v4;
 const app = express();
 const {Storage} = require('@google-cloud/storage');
+require('dotenv').config()
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -25,7 +26,7 @@ if (!fs.existsSync(filesDir)) {
 
 // Firebase
 const admin = require("firebase-admin");
-const serviceAccount = require("./key/video-content-manager-firebase-adminsdk-gld7u-b13bf7b8f3.json");
+const serviceAccount = require(process.env.FIREBASE_ADMIN_SDK_JSON);
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
 });
@@ -40,11 +41,11 @@ uploadFilesToDb.set({
 });
 
 const storageToFirebase = new Storage({
-    keyFilename: "./key/video-content-manager-firebase-adminsdk-gld7u-b13bf7b8f3.json",
+    keyFilename: process.env.FIREBASE_ADMIN_SDK_JSON,
 });
 
 let bucketName = "video-content-manager.appspot.com"
-let filename = "uploads/The Dark Knight - Kill the Batman.mp4";
+let filename = "uploads/John Wick - How much for the car.mp4";
 
 const uploadFile = async () => {
     await storageToFirebase.bucket(bucketName).upload(filename, {
@@ -71,7 +72,7 @@ app.post('/upload', upload.array('avatar'), (req, res) => {
     //     console.log(doc.id, '=>', doc.data());
     // });
 });
-
-app.listen(3001, () => {
-    console.log("Listening on port 3001...")
+const PORT = process.env.PORT || 80;
+app.listen(PORT, () => {
+    console.log(`Server is listening on port ${PORT}...`)
 });

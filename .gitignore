@@ -1,3 +1,5 @@
 node_modules
 uploads/*
-key/*
+key/
+.env
+.idea/
